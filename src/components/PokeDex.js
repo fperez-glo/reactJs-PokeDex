@@ -1,14 +1,14 @@
 import React from "react";
 import PokeDexCard from "./PokeDexCard";
-import "../styles/PokeDex.css";
+import style from '../styles/PokeDex.js'
 
 const PokeDex = () => {
   return (
     <>
-      <div className="poke-dex-container">
+      <div style={style.pokeDexContainer}>
         <PokeDexCard />
       </div>
-      <div className="poke-dex-detail"></div>
+      <div style={style.pokeDexDetail}></div>
     </>
   );
 };

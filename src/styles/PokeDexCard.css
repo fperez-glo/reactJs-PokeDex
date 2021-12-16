@@ -75,23 +75,23 @@
 .rightArrow::before {
     display: block;
    content: "";
-   height: 3px;
-   width: 20px;
+   height: 0.4vh;
+   width: 2.6vh;
    background-color: #fff;
    position:relative;
-   top: 23px;
-   left: 6px;
+   top: 3vh;
+   left: 1.1vh;
    transform: rotate(45deg);
 }
 .rightArrow::after {
     display: block;
     content: "";
-    height: 3px;
-    width: 20px;
+    height: 0.4vh;
+    width: 2.6vh;
     background-color: #fff;
     position:relative;
-    top: 7px;
-    left: 5px;
+    top: 1vh;
+    left: 1.1vh;
     transform: rotate(-45deg);
  }
 
@@ -112,23 +112,23 @@
 .leftArrow::before {
     display: block;
    content: "";
-   height: 3px;
-   width: 20px;
+   height: 0.4vh;
+   width: 2.6vh;
    background-color: #fff;
    position:relative;
-   top: 23px;
-   left: 10px;
+   top: 3vh;
+   left: 1.3vh;
    transform: rotate(-45deg);
 }
 .leftArrow::after {
     display: block;
     content: "";
-    height: 3px;
-    width: 20px;
+    height: 0.4vh;
+    width: 2.6vh;
     background-color: #fff;
     position:relative;
-    top: 7px;
-    left: 10px;
+    top: 1vh;
+    left: 1.3vh;
     transform: rotate(45deg);
  }
 
