@@ -1,0 +1,15 @@
+.poke-dex-container {
+    background-color: rgb(175, 33, 14);
+    min-height: 90vh;
+    min-width: 50vh;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 10px 10px 5px -1px rgba(0,0,0,0.6);
+}
+
+.poke-dex-detail {
+    background-color: blue;
+    min-width: 70vh;
+}
