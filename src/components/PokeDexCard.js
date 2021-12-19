@@ -1,50 +1,85 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import ActivityIndicator from "./ActivityIndicator";
 import "../styles/PokeDexCard.css";
-import Screen from "./Screen";
+import styled from 'styled-components';
+import pikachuLoading from '../resources/loading/pikachuLoading.gif'
 
-const PokeDexCard = () => {
-  const [powerOnOff, setPowerOnOff] = useState(false);
-  const [strOff, setStrOff] = useState("");
+const Sprite = styled.img`
+    width: 5em;
+    height: 5em;
+    display: none;
+  `;
 
-  const pokeDexOnOff = async () => {
-    if (powerOnOff) {
-      setPowerOnOff(false);
-      setTimeout(() => {
-        setStrOff("Apagando.");
-        setTimeout(() => {
-          setStrOff("Apagando..");
-          setTimeout(() => {
-            setStrOff("Apagando...");
-            setTimeout(() => {
-              setStrOff("");
-            }, 500);
-          }, 500);
-        }, 500);
-      }, 500);
-      return;
-    }
-    console.log("Sigue de largo??");
-    setPowerOnOff(true);
-    setStrOff("Apagando");
-  };
-  console.log("powerOnOff:", powerOnOff);
+const PokeDexCard = ({loading, list}) => {
+  const [selectedPokemon, setSelectedPokemon] = useState(list[0]);
+  const [imgLoading, setImgLoading] = useState(true)
+
+  
+
+
+  const handleSelect = () => {
+    const selectBox = document.getElementById("selectBox");
+    const pokemonId = selectBox.options[selectBox.selectedIndex].value;
+    const spriteUrl = `https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/${pokemonId}.png`
+    const pokeFilter = list.filter(pokemon => obtainPokemonId(pokemon.url) === pokemonId);
+    pokeFilter[0].spriteUrl = spriteUrl
+    console.log('pokeFilter:',pokeFilter)
+    setSelectedPokemon(pokeFilter[0]);
+  }
+
+
+
+
+  const obtainPokemonId = (url) => {
+    const pokeId = url.split('/')[url.split('/').length - 2];
+
+    return pokeId;
+  }
+
+  console.log('selectedPokemon:',selectedPokemon)
+  
 
   return (
-    <div className="card-container">
-      <div className="screen">{powerOnOff ? <Screen /> : strOff}</div>
-      <div className="button-container">
-        <div className="power-up" onClick={() => pokeDexOnOff()}></div>
-        <div className="arrow-container">
-          <div className="right-arrow-container">
-            <span className="rightArrow"></span>
+    <>
+      {loading ? (
+        <ActivityIndicator />
+      ) : (
+        <>
+          <div className="screenON">
+            {selectedPokemon?.name}
+            <img src={imgLoading ? pikachuLoading : null}></img>
+            <Sprite
+              // className="card-img-top rounded mx-auto mt-2"
+              src={selectedPokemon?.spriteUrl}
+              onLoad={() => setImgLoading(false)}
+              //onError={() => this.setState({ toManyRequests: true })}
+              // style={
+              //   this.state.toManyRequests
+              //     ? { display: 'none' }
+              //     : this.state.imageLoading
+              //     ? null
+              //     : { display: 'block' }
+              // }
+            />
+            <div className='listContainer'>
+              <select id="selectBox" onChange={()=> handleSelect()} className='list'>
+                {list.map((item)=>(
+                    <option key={obtainPokemonId(item.url)} value={obtainPokemonId(item.url)}>
+                      
+                      {item.name}
+                    </option>
+                    ))}
+              </select>
+              <datalist>
+
+              </datalist>
+              
+            </div>
+            
           </div>
-          <div className="left-arrow-container">
-            <span className="leftArrow"></span>
-          </div>
-        </div>
-        <div className="button">Habilidades</div>
-      </div>
-    </div>
+        </>
+      )}
+    </>
   );
 };
 
